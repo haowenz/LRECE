@@ -78,7 +78,7 @@ install_sra_tools(){
 }
 
 main(){
-  git submodule update --remote --merge
+  git submodule update
   install_seqtk
   install_minimap2
   install_sra_tools
