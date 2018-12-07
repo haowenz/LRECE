@@ -26,10 +26,10 @@ readonly RAW_D1I1="ftp://webdata:webdata@ussd-ftp.illumina.com/Data/SequencingRu
 readonly RAW_D1I2="ftp://webdata:webdata@ussd-ftp.illumina.com/Data/SequencingRuns/MG1655/MiSeq_Ecoli_MG1655_110721_PF_R2.fastq.gz"
 readonly RAW_D1P="https://s3.amazonaws.com/files.pacb.com/datasets/secondary-analysis/e-coli-k12-P6C4/p6c4_ecoli_RSII_DDR2_with_15kb_cut_E01_1.tar.gz"
 readonly RAW_D1O1D="${LRECBENCH_DIR}/accession_lists/D1O1D.txt" # need sra tools
-readonly RAW_D1O2D1="ftp://ftp.sra.ebi.ac.uk/vol1/ERA411/ERA411499/oxfordnanopore_native/flowcell_20_LomanLabz_PC_Ecoli_K12_R7.3.tar"
-readonly RAW_D1O2D2="ftp://ftp.sra.ebi.ac.uk/vol1/ERA411/ERA411499/oxfordnanopore_native/flowcell_32_LomanLabz_K12_His_tag.tar"
-readonly RAW_D1O2D3="ftp://ftp.sra.ebi.ac.uk/vol1/ERA411/ERA411499/oxfordnanopore_native/flowcell_33_LomanLabz_PC_K12_0.4SPRI_Histag.tar"
-readonly RAW_D1O2D4="ftp://ftp.sra.ebi.ac.uk/vol1/ERA411/ERA411499/oxfordnanopore_native/flowcell_39.tar"
+readonly RAW_D1O2D1="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764952/flowcell_20_LomanLabz_PC_Ecoli_K12_R7.3.tar"
+readonly RAW_D1O2D2="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764953/flowcell_32_LomanLabz_K12_His_tag.tar"
+readonly RAW_D1O2D3="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764954/flowcell_33_LomanLabz_PC_K12_0.4SPRI_Histag.tar"
+readonly RAW_D1O2D4="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764955/flowcell_39.tar"
 
 # flowcell data to generate 2D reads (the ncbi links are unvalid, use the links from ebi instead)
 # ERX708228: https://sra-download.ncbi.nlm.nih.gov/traces/era21/ERZ/000764/ERR764952/flowcell_20_LomanLabz_PC_Ecoli_K12_R7.3.tar
