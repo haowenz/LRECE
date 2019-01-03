@@ -69,7 +69,7 @@ check_args(){
   REFERENCE="${FLAGS_reference}"
   readonly REFERENCE
   if [[ ! -d "${FLAGS_correctedReadDir}" ]]; then
-    err "Corrected read directory does not exist!"
+    err "Corrected read directory "${FLAGS_correctedReadDir}" does not exist!"
   fi
   CORRECTED_READ_DIR="${FLAGS_correctedReadDir}"
   readonly CORRECTED_READ_DIR
@@ -90,9 +90,9 @@ main(){
   mkdir "${STATS_OUTPUT_DIR}"
   for corrected_read_file in ${CORRECTED_READ_DIR}/*.fasta*; do
     if [[ "${GRID_ENGINE}" == "sh" ]]; then
-      sh "${COMPUTE_STATS_SCRIPT}" "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${CORRECTED_READ_DIR} ${LRECBENCH_DIR}" &
+      sh "${COMPUTE_STATS_SCRIPT}" "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECBENCH_DIR}" &
     elif [[ "${GRID_ENGINE}" == "qsub" ]]; then
-      qsub "${COMPUTE_STATS_SCRIPT}" -F "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${CORRECTED_READ_DIR} ${LRECBENCH_DIR}" &
+      qsub "${COMPUTE_STATS_SCRIPT}" -F "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECBENCH_DIR}" &
     else
       err "Grid engine ${GRID_ENGINE} is not supported."
     fi
