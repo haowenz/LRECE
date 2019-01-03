@@ -3,9 +3,9 @@
 # This is a script to download sequencing data and establish benchmark
 
 readonly DIR_TO_SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-readonly LRECBENCH_DIR="$( cd "${DIR_TO_SRC}/.." >/dev/null && pwd )"
-readonly FASTERQ_DUMP="${LRECBENCH_DIR}/ncbi/bin/fasterq-dump"
-readonly SEQTK="${LRECBENCH_DIR}/seqtk/seqtk"
+readonly LRECE_DIR="$( cd "${DIR_TO_SRC}/.." >/dev/null && pwd )"
+readonly FASTERQ_DUMP="${LRECE_DIR}/ncbi/bin/fasterq-dump"
+readonly SEQTK="${LRECE_DIR}/seqtk/seqtk"
 
 # source shflags
 source "${DIR_TO_SRC}/shflags"
@@ -25,7 +25,7 @@ eval set -- "${FLAGS_ARGV}"
 readonly RAW_D1I1="ftp://webdata:webdata@ussd-ftp.illumina.com/Data/SequencingRuns/MG1655/MiSeq_Ecoli_MG1655_110721_PF_R1.fastq.gz" 
 readonly RAW_D1I2="ftp://webdata:webdata@ussd-ftp.illumina.com/Data/SequencingRuns/MG1655/MiSeq_Ecoli_MG1655_110721_PF_R2.fastq.gz"
 readonly RAW_D1P="https://s3.amazonaws.com/files.pacb.com/datasets/secondary-analysis/e-coli-k12-P6C4/p6c4_ecoli_RSII_DDR2_with_15kb_cut_E01_1.tar.gz"
-readonly RAW_D1O1D="${LRECBENCH_DIR}/accession_lists/D1O1D.txt" # need sra tools
+readonly RAW_D1O1D="${LRECE_DIR}/accession_lists/D1O1D.txt" # need sra tools
 readonly RAW_D1O2D1="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764952/flowcell_20_LomanLabz_PC_Ecoli_K12_R7.3.tar"
 readonly RAW_D1O2D2="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764953/flowcell_32_LomanLabz_K12_His_tag.tar"
 readonly RAW_D1O2D3="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764954/flowcell_33_LomanLabz_PC_K12_0.4SPRI_Histag.tar"
@@ -42,17 +42,17 @@ readonly RAW_D1O2D4="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764955/flowcell_
 # ftp://ftp.sra.ebi.ac.uk/vol1/ERA411/ERA411499/oxfordnanopore_native/flowcell_39.tar
 
 # Data sets for yeast
-readonly RAW_D2I="${LRECBENCH_DIR}/accession_lists/D2I.txt" # need sra tools
-readonly RAW_D2P="${LRECBENCH_DIR}/accession_lists/D2P.txt" # need sra tools
+readonly RAW_D2I="${LRECE_DIR}/accession_lists/D2I.txt" # need sra tools
+readonly RAW_D2P="${LRECE_DIR}/accession_lists/D2P.txt" # need sra tools
 readonly RAW_D2P1="https://sra-download.ncbi.nlm.nih.gov/traces/era17/ERZ/001655/ERR1655118/ERR1655118_hdf5.tgz"
 readonly RAW_D2P2="https://sra-download.ncbi.nlm.nih.gov/traces/era16/ERZ/001655/ERR1655119/ERR1655119_hdf5.tgz"
 readonly RAW_D2P3="https://sra-download.ncbi.nlm.nih.gov/traces/era15/ERZ/001655/ERR1655125/ERR1655125_hdf5.tgz"
 readonly RAW_D2O="https://www.ebi.ac.uk/biostudies/files/S-BSST17/u/yeast_ont_scirep7_3935.tar.gz" 
 
 # Data sets for fruit fly
-readonly RAW_D3I="${LRECBENCH_DIR}/accession_lists/D3I.txt" # need sra tools
-readonly RAW_D3P="${LRECBENCH_DIR}/accession_lists/D3P.txt" # need sra tools
-readonly RAW_D3O="${LRECBENCH_DIR}/accession_lists/D3O.txt" # need sra tools
+readonly RAW_D3I="${LRECE_DIR}/accession_lists/D3I.txt" # need sra tools
+readonly RAW_D3P="${LRECE_DIR}/accession_lists/D3P.txt" # need sra tools
+readonly RAW_D3O="${LRECE_DIR}/accession_lists/D3O.txt" # need sra tools
 
 # Variables for configuration
 TEMP_DIR=""

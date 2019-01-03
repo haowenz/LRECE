@@ -3,7 +3,7 @@
 # This is a script to evaluate correction
 
 readonly DIR_TO_SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-readonly LRECBENCH_DIR="$( cd "${DIR_TO_SRC}/.." >/dev/null && pwd )"
+readonly LRECE_DIR="$( cd "${DIR_TO_SRC}/.." >/dev/null && pwd )"
 readonly COMPUTE_STATS_SCRIPT="${DIR_TO_SRC}/compute_stats.sh"
 
 # source shflags
@@ -90,9 +90,9 @@ main(){
   mkdir "${STATS_OUTPUT_DIR}"
   for corrected_read_file in ${CORRECTED_READ_DIR}/*.fasta*; do
     if [[ "${GRID_ENGINE}" == "sh" ]]; then
-      sh "${COMPUTE_STATS_SCRIPT}" "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECBENCH_DIR}" &
+      sh "${COMPUTE_STATS_SCRIPT}" "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECE_DIR}" &
     elif [[ "${GRID_ENGINE}" == "qsub" ]]; then
-      qsub "${COMPUTE_STATS_SCRIPT}" -F "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECBENCH_DIR}" &
+      qsub "${COMPUTE_STATS_SCRIPT}" -F "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECE_DIR}" &
     else
       err "Grid engine ${GRID_ENGINE} is not supported."
     fi

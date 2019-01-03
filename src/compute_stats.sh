@@ -11,6 +11,7 @@
 #PBS -j oe
 #PBS -m abe
 #PBS -M hwzhang94@gmail.com
+#PBS -o /nv/hswarm1/hzhang639/data/results
 ###################################################
 
 err() {
@@ -30,15 +31,15 @@ MIN_READ_LENGTH="${4}"
 CORRECTED_READ_PATH="${5}"
 REFERENCE="${6}"
 OUTPUT_DIR="${7}"
-LRECBENCH_DIR="${8}"
+LRECE_DIR="${8}"
 FILTER_READS_OUTPUT_DIR="${OUTPUT_DIR}/filtered_reads_${DATA_SET_NAME}"
 ALIGNMENT_OUTPUT_DIR="${OUTPUT_DIR}/alignment_${DATA_SET_NAME}"
 STATS_OUTPUT_DIR="${OUTPUT_DIR}/stats_${DATA_SET_NAME}"
 
-readonly LRECBENCH_DIR
-readonly SEQTK="${LRECBENCH_DIR}/seqtk/seqtk"
-readonly N50="${LRECBENCH_DIR}/src/N50.py"
-readonly MINIMAP2="${LRECBENCH_DIR}/minimap2/minimap2"
+readonly LRECE_DIR
+readonly SEQTK="${LRECE_DIR}/seqtk/seqtk"
+readonly N50="${LRECE_DIR}/src/N50.py"
+readonly MINIMAP2="${LRECE_DIR}/minimap2/minimap2"
 
 echo "Start to evaluate corrected reads."
 
@@ -87,6 +88,7 @@ rm "${read_length_file}"
 # Calculate genome coverage
 bed_file="${STATS_OUTPUT_DIR}/${read_file_name}.bed"
 bedtools genomecov -max "${MIN_COVERAGE}" -ibam "${sorted_bam_file}" > "${bed_file}"
+rm "${sorted_bam_file}"
 printf "Genome fraction:    " >> "${stats_txt_file}"
 cut -f 5- "${bed_file}" | tail -1 >> "${stats_txt_file}"
 rm "${bed_file}"
