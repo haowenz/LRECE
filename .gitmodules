@@ -1,15 +1,15 @@
 [submodule "minimap2"]
-	path = minimap2
+	path = extern/minimap2
 	url = git@github.com:lh3/minimap2.git
 [submodule "seqtk"]
-	path = seqtk
+	path = extern/seqtk
 	url = git@github.com:lh3/seqtk.git
 [submodule "ngs"]
-	path = ngs
+	path = extern/ngs
 	url = git@github.com:ncbi/ngs.git
 [submodule "ncbi-vdb"]
-	path = ncbi-vdb
+	path = extern/ncbi-vdb
 	url = git@github.com:ncbi/ncbi-vdb.git
 [submodule "sra-tools"]
-	path = sra-tools
+	path = extern/sra-tools
 	url = git@github.com:ncbi/sra-tools.git

@@ -4,8 +4,9 @@
 
 readonly DIR_TO_SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 readonly LRECE_DIR="$( cd "${DIR_TO_SRC}/.." >/dev/null && pwd )"
+readonly EXTERN_DIR="${LRECE_DIR}/extern"
 readonly FASTERQ_DUMP="${LRECE_DIR}/ncbi/bin/fasterq-dump"
-readonly SEQTK="${LRECE_DIR}/seqtk/seqtk"
+readonly SEQTK="${EXTERN_DIR}/seqtk/seqtk"
 
 # source shflags
 source "${DIR_TO_SRC}/shflags"

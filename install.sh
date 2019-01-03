@@ -4,6 +4,7 @@
 # Note that conda is required.
 
 readonly LRECE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+readonly EXTERN_DIR="${LRECE_DIR}/extern"
 readonly NCBI_DIR="${LRECE_DIR}/ncbi"
 
 err() {
@@ -14,7 +15,7 @@ err() {
 install_seqtk(){
   echo "Start to install seqtk."
   local seqtk_dir
-  seqtk_dir="${LRECE_DIR}/seqtk"
+  seqtk_dir="${EXTERN_DIR}/seqtk"
   cd "${seqtk_dir}"
   make 
   if [[ $? -ne 0 ]]; then
@@ -26,7 +27,7 @@ install_seqtk(){
 install_minimap2(){
   echo "Start to install minimap2"
   local minimap2_dir
-  minimap2_dir="${LRECE_DIR}/minimap2"
+  minimap2_dir="${EXTERN_DIR}/minimap2"
   cd "${minimap2_dir}"
   make 
   if [[ $? -ne 0 ]]; then
@@ -38,7 +39,7 @@ install_minimap2(){
 install_ngs(){
   echo "Start to install ngs."
   local ngs_dir
-  ngs_dir="${LRECE_DIR}/ngs"
+  ngs_dir="${EXTERN_DIR}/ngs"
   cd "${ngs_dir}"
   ./configure --build-prefix="${NCBI_DIR}/build" --prefix="${NCBI_DIR}"
   make && make install
@@ -51,7 +52,7 @@ install_ngs(){
 install_ncbi_vdb(){
   echo "Start to install ncbi-vdb."
   local ncbi_vdb_dir
-  ncbi_vdb_dir="${LRECE_DIR}/ncbi-vdb"
+  ncbi_vdb_dir="${EXTERN_DIR}/ncbi-vdb"
   cd "${ncbi_vdb_dir}"
   ./configure --build-prefix="${NCBI_DIR}/build" --prefix="${NCBI_DIR}"
   make && make install
@@ -67,7 +68,7 @@ install_sra_tools(){
   install_ngs
   install_ncbi_vdb
   local sra_tools_dir
-  sra_tools_dir="${LRECE_DIR}/sra-tools"
+  sra_tools_dir="${EXTERN_DIR}/sra-tools"
   cd "${sra_tools_dir}"
   ./configure --build-prefix="${NCBI_DIR}/build" --prefix="${NCBI_DIR}"
   make && make install

@@ -37,9 +37,10 @@ ALIGNMENT_OUTPUT_DIR="${OUTPUT_DIR}/alignment_${DATA_SET_NAME}"
 STATS_OUTPUT_DIR="${OUTPUT_DIR}/stats_${DATA_SET_NAME}"
 
 readonly LRECE_DIR
-readonly SEQTK="${LRECE_DIR}/seqtk/seqtk"
+readonly EXTERN_DIR="${LRECE_DIR}/extern"
+readonly SEQTK="${EXTERN_DIR}/seqtk/seqtk"
+readonly MINIMAP2="${EXTERN_DIR}/minimap2/minimap2"
 readonly N50="${LRECE_DIR}/src/N50.py"
-readonly MINIMAP2="${LRECE_DIR}/minimap2/minimap2"
 
 echo "Start to evaluate corrected reads."
 
