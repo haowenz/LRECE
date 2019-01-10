@@ -41,7 +41,7 @@ Or use paired-end short reads to correct ONT long reads:
 ```
 sh run_correction_tools.sh -n 'data_set_name' -p 'ont' -1 data/short_read_1.fa -2 data/short_read_2.fa -l data/long_read.fa -t tmpDir -o outputDir
 ```
-For more help information:
+For help information:
 ```
 sh run_correction_tools.sh -h
 ```
@@ -52,9 +52,9 @@ For all the corrected read files in *correctedReadDir*, filter out corrected Pac
 ```
 sh evaluate_correction.sh -g 'sh' -n 'data_set_name' -p 'pb' -l 1000 -r data/ref.fa -i correctedReadDir -o outputDir
 ```
-Filter out corrected ONT reads of length less than 500bp (default value for -l)Submit evaluation job with *qsub* and :
+Filter out corrected ONT reads of length less than 500bp (default value for -l) and submit evaluation job with *qsub*:
 ```
-sh evaluate_correction.sh -g 'sh' -n 'data_set_name' -p 'ont' -r data/ref.fa -i correctedReadDir -o outputDir
+sh evaluate_correction.sh -n 'data_set_name' -p 'ont' -r data/ref.fa -i correctedReadDir -o outputDir
 ```
 Print the help information:
 ```
