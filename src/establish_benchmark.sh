@@ -31,6 +31,7 @@ readonly RAW_D1O2D1="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764952/flowcell_
 readonly RAW_D1O2D2="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764953/flowcell_32_LomanLabz_K12_His_tag.tar"
 readonly RAW_D1O2D3="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764954/flowcell_33_LomanLabz_PC_K12_0.4SPRI_Histag.tar"
 readonly RAW_D1O2D4="ftp://ftp.sra.ebi.ac.uk/vol1/run/ERR764/ERR764955/flowcell_39.tar"
+readonly RAW_D1O="https://s3.climb.ac.uk/nanopore/E_coli_K12_1D_R9.2_SpotON_2.pass.fasta"
 
 # flowcell data to generate 2D reads (the ncbi links are unvalid, use the links from ebi instead)
 # ERX708228: https://sra-download.ncbi.nlm.nih.gov/traces/era21/ERZ/000764/ERR764952/flowcell_20_LomanLabz_PC_Ecoli_K12_R7.3.tar
@@ -288,6 +289,15 @@ prepare_ecoli_data(){
   download_data_with_sra_tools "${RAW_D1O1D}" true "${ecoli_ont_1D}" 'NULL'
   mv "${ecoli_ont_1D}" "${d1_dir}" 
   "${SEQTK}" seq -A "${d1_dir}/ecoli_ont_1D.fastq" > "${d1_dir}/ecoli_ont_1D.fasta"
+
+  local ecoli_ont_R9_1D
+  ecoli_ont_R9_1D="ecoli_ont_R9_1D.fasta"
+  wget "${RAW_D1O}" -O "${ecoli_ont_R9_1D}"
+  if [[ $? -ne 0 ]]; then
+    err "Failed to download E. coli ONT R9 1D data!"
+  fi
+  echo "Downloaded E. coli ONT R9 1D data successfully."
+  mv "${ecoli_ont_R9_1D}" "${d1_dir}" 
 }
 
 prepare_yeast_data(){ 
