@@ -88,11 +88,14 @@ main(){
   mkdir "${FILTER_READS_OUTPUT_DIR}"
   mkdir "${ALIGNMENT_OUTPUT_DIR}"
   mkdir "${STATS_OUTPUT_DIR}"
-  for corrected_read_file in ${CORRECTED_READ_DIR}/*.fasta*; do
+  cd "${CORRECTED_READ_DIR}"
+  shopt -s nullglob
+  for corrected_read_file in *.fa *.fq *.fasta *.fastq; do
+    corrected_read_file_path="${CORRECTED_READ_DIR}/${corrected_read_file}"
     if [[ "${GRID_ENGINE}" == "sh" ]]; then
-      sh "${COMPUTE_STATS_SCRIPT}" "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECE_DIR}" &
+      sh "${COMPUTE_STATS_SCRIPT}" "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file_path} ${REFERENCE} ${OUTPUT_DIR} ${LRECE_DIR}" &
     elif [[ "${GRID_ENGINE}" == "qsub" ]]; then
-      qsub "${COMPUTE_STATS_SCRIPT}" -F "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file} ${REFERENCE} ${OUTPUT_DIR} ${LRECE_DIR}" &
+      qsub "${COMPUTE_STATS_SCRIPT}" -F "${PLATFORM} ${DATA_SET_NAME} ${MIN_COVERAGE} ${MIN_READ_LENGTH} ${corrected_read_file_path} ${REFERENCE} ${OUTPUT_DIR} ${LRECE_DIR}" &
     else
       err "Grid engine ${GRID_ENGINE} is not supported."
     fi

@@ -83,8 +83,7 @@ main(){
   install_seqtk
   install_minimap2
   install_sra_tools
-  conda create -n "pbh5tools" pbh5tools
-  conda create -n "poretools" poretools
+  conda create -n "lrece" pbh5tools poretools samtools
 }
 
 main "$@"

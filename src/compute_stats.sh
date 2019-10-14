@@ -7,11 +7,11 @@
 #PBS -N compute_stats
 #PBS -l nodes=1:ppn=28
 #PBS -l walltime=72:00:00
-#PBS -q swarm
+#PBS -q job_queue_name
 #PBS -j oe
 #PBS -m abe
-#PBS -M hwzhang94@gmail.com
-#PBS -o /nv/hswarm1/hzhang639/data/results
+#PBS -M your@email.com
+#PBS -o /path/to/save/results
 ###################################################
 
 err() {
@@ -62,7 +62,7 @@ fi
 rm "${filtered_reads_file}"
 
 # We use samtools to generate stats
-source activate samtools
+source activate lrece
 bam_file="${ALIGNMENT_OUTPUT_DIR}/${read_file_name}.bam"
 samtools view -o "${bam_file}" "${sam_file}"
 rm "${sam_file}"

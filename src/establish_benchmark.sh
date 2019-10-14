@@ -191,9 +191,7 @@ prepare_ecoli_data(){
   fi
   # Need pbh5tools (https://github.com/PacificBiosciences/pbh5tools) to extract data
   echo "Start to extract E. coli PacBio data with pbh5tools."
-  source activate pbh5tools
   bash5tools.py --readType "subreads" --outFilePrefix ecoli_pacbio --outType "fastq"  "E01_1/Analysis_Results/m141013_011508_sherri_c100709962550000001823135904221533_s1_p0.bas.h5"
-  source deactivate
   rm -r "E01_1"
   echo "Extract E. coli PacBio data successfully!"
   mv "ecoli_pacbio.fastq" "${d1_dir}"
@@ -217,7 +215,6 @@ prepare_ecoli_data(){
   if [[ $? -ne 0 ]]; then
     err "Failed to decompress E. coli ONT data 1!"
   fi
-  source activate poretools
   echo "Start to extract 2D reads."
   poretools fastq --type 2D "flowcell_20/1.9/downloads/pass/" >> "${ecoli_ont_2D}"
   rm -r "flowcell_20"
@@ -279,7 +276,6 @@ prepare_ecoli_data(){
   poretools fastq --type 2D "flowcell_39_K12_Histag/downloads/pass/" >> "${ecoli_ont_2D}"
   rm -r "flowcell_39_K12_Histag"
   echo "Extracted 2D reads successfully."
-  source deactivate
   mv "${ecoli_ont_2D}" "${d1_dir}"
   "${SEQTK}" seq -A "${d1_dir}/ecoli_ont_2D.fastq" > "${d1_dir}/ecoli_ont_2D.fasta"
 
@@ -322,7 +318,6 @@ prepare_yeast_data(){
   local yeast_pacbio
   yeast_pacbio="yeast_pacbio.fastq"
   touch "${yeast_pacbio}"
-  source activate pbh5tools
 
   echo "Start to download yeast PacBio data 1."
   wget "${RAW_D2P1}"
@@ -391,7 +386,6 @@ prepare_yeast_data(){
   rm -rf m150423_060136_00127_c100802652550000001823174910081537_s1_p0*
   echo "Extract yeast PacBio data successfully!"
 
-  source deactivate
   mv "${yeast_pacbio}" "${d2_dir}"
   "${SEQTK}" seq -A "${d2_dir}/yeast_pacbio.fastq" > "${d2_dir}/yeast_pacbio.fasta"
   echo "Finished yeast PacBio read preparation successfully."
@@ -472,6 +466,7 @@ main(){
   # TODO(haowen): Start from last time to establish the benchmark
   mkdir "${TEMP_DIR}"
   mkdir "${BENCHMARK_DIR}"
+  source activate lrece
   if [[ "${FLAGS_ecoli}" -eq "${FLAGS_TRUE}" ]]; then
     echo "Start to prepare E. coli data set."
     prepare_ecoli_data
@@ -496,6 +491,7 @@ main(){
     fi
     echo "Fruit fly data set is ready."
   fi
+  source deactivate
 }
 
 main "$@"

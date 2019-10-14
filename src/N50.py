@@ -16,13 +16,13 @@ def compute_N50(read_length_distribution_file_path):
     total_read_length = 0
     read_length_list = []
     num_reads_list = []
-    with fileinput.input(files = read_length_distribution_file_path) as read_length_distribution_file:
-        for line in read_length_distribution_file:
-            read_length, num_reads = map(int, line.split())
-            if read_length >= min_read_length:
-                read_length_list.append(read_length)
-                num_reads_list.append(num_reads)
-                total_read_length = total_read_length + read_length * num_reads 
+    read_length_distribution_file = fileinput.input(files = read_length_distribution_file_path)
+    for line in read_length_distribution_file:
+        read_length, num_reads = map(int, line.split())
+        if read_length >= min_read_length:
+            read_length_list.append(read_length)
+            num_reads_list.append(num_reads)
+            total_read_length = total_read_length + read_length * num_reads 
     sum_read_length = 0
     N50 = 0
     while len(read_length_list) > 0 and len(num_reads_list) > 0:
