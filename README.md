@@ -3,11 +3,11 @@ LRECE (**L**ong **R**ead **E**rror **C**orrection **E**valuation) is a set of sc
 
 ## Installation
 ### Install dependencies
-Make sure [Conda](https://conda.io/docs/) and [Samtools](http://www.htslib.org) are in your *PATH* environment variable.
+Make sure [Conda](https://conda.io/docs/) is in your *PATH* environment variable. A Conda environment named *lrece* will be created after the installation.
 
 LRECE also uses [minimap2](https://github.com/lh3/minimap2/), [seqtk](https://github.com/lh3/seqtk/), [ncbi-vdb](https://github.com/ncbi/ncbi-vdb/), [ngs](https://github.com/ncbi/ngs/) and [sra-tools](https://github.com/ncbi/sra-tools/) as submodules. But you don't have to install them by yourself since we provide a script to build and install them.
 
-[pbh5tools](https://github.com/PacificBiosciences/pbh5tools) and [poretools](https://github.com/arq5x/poretools) are also required but will be installed by Conda.
+[pbh5tools](https://github.com/PacificBiosciences/pbh5tools), [poretools](https://github.com/arq5x/poretools) and [Samtools](http://www.htslib.org) are also required but will be installed by Conda.
 
 ### Download and install
 First get the repo:
