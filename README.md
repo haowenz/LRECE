@@ -3,11 +3,7 @@ LRECE (**L**ong **R**ead **E**rror **C**orrection **E**valuation) is a set of sc
 
 ## Installation
 ### Install dependencies
-Make sure [Conda](https://conda.io/docs/) is in your *PATH* environment variable. A Conda environment named *lrece* will be created after the installation.
-
-LRECE also uses [minimap2](https://github.com/lh3/minimap2/), [seqtk](https://github.com/lh3/seqtk/), [ncbi-vdb](https://github.com/ncbi/ncbi-vdb/), [ngs](https://github.com/ncbi/ngs/) and [sra-tools](https://github.com/ncbi/sra-tools/) as submodules. But you don't have to install them by yourself since we provide a script to build and install them.
-
-[pbh5tools](https://github.com/PacificBiosciences/pbh5tools), [poretools](https://github.com/arq5x/poretools) and [Samtools](http://www.htslib.org) are also required but will be installed by Conda.
+[Conda](https://conda.io/docs/) is the only thing required. Make sure it is installed and in your *PATH* environment variable. A Conda environment named *lrece* will be created after the installation. Conda will install [minimap2](https://github.com/lh3/minimap2/), [seqtk](https://github.com/lh3/seqtk/), [sra-tools](https://github.com/ncbi/sra-tools/) (>=2.9.1), [pbh5tools](https://github.com/PacificBiosciences/pbh5tools) and [Samtools](http://www.htslib.org) in the *lrece* environment.
 
 ### Download and install
 First get the repo:
@@ -18,7 +14,7 @@ Then just run:
 ```
 cd LRECE && sh install.sh
 ```
-LRECE will download the submodules and build them automatically. Note that two Conda environments, *pbh5tools* and *poretools* will be created.
+Conda environment called *lrece* will be setup.
 
 ## Usage
 ### Establish benchmark

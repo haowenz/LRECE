@@ -4,9 +4,8 @@
 
 readonly DIR_TO_SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 readonly LRECE_DIR="$( cd "${DIR_TO_SRC}/.." >/dev/null && pwd )"
-readonly EXTERN_DIR="${LRECE_DIR}/extern"
-readonly FASTERQ_DUMP="${LRECE_DIR}/ncbi/bin/fasterq-dump"
-readonly SEQTK="${EXTERN_DIR}/seqtk/seqtk"
+readonly FASTERQ_DUMP="fasterq-dump"
+readonly SEQTK="seqtk"
 
 # source shflags
 source "${DIR_TO_SRC}/shflags"
@@ -198,94 +197,6 @@ prepare_ecoli_data(){
   "${SEQTK}" seq -A "${d1_dir}/ecoli_pacbio.fastq" > "${d1_dir}/ecoli_pacbio.fasta" 
 
   # Prepare Nanopore reads
-  local ecoli_ont_2D
-  ecoli_ont_2D="ecoli_ont_2D.fastq"
-  touch "${ecoli_ont_2D}"
-  local ecoli_ont_1_file_name
-  ecoli_ont_1_file_name="ecoli_ont_1.tar"
-  echo "Start to download E. coli ONT data 1."
-  wget "${RAW_D1O2D1}" -O "${ecoli_ont_1_file_name}"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to download E. coli ONT data 1!"
-  fi
-  echo "Downloaded E. coli ONT data 1 successfully."
-  echo "Start to decompress it."
-  tar -xf "${ecoli_ont_1_file_name}" && rm "${ecoli_ont_1_file_name}"
-  echo "Decompressed it successfully."
-  if [[ $? -ne 0 ]]; then
-    err "Failed to decompress E. coli ONT data 1!"
-  fi
-  echo "Start to extract 2D reads."
-  poretools fastq --type 2D "flowcell_20/1.9/downloads/pass/" >> "${ecoli_ont_2D}"
-  rm -r "flowcell_20"
-  echo "Extracted 2D reads successfully."
-
-  local ecoli_ont_2_file_name
-  ecoli_ont_2_file_name="ecoli_ont_2.tar"
-  echo "Start to download E. coli ONT data 2."
-  wget "${RAW_D1O2D2}" -O "${ecoli_ont_2_file_name}"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to download E. coli ONT data 2!"
-  fi
-  echo "Downloaded E. coli ONT data 2 successfully."
-  echo "Start to decompress it."
-  tar -xf "${ecoli_ont_2_file_name}" && rm "${ecoli_ont_2_file_name}"
-  echo "Decompressed it successfully."
-  if [[ $? -ne 0 ]]; then
-    err "Failed to decompress E. coli ONT data 2!"
-  fi
-  echo "Start to extract 2D reads."
-  poretools fastq --type 2D "flowcell_32/downloads/pass/" >> "${ecoli_ont_2D}"
-  rm -r "flowcell_32"
-  echo "Extracted 2D reads successfully."
-
-  local ecoli_ont_3_file_name
-  echo "Start to download E. coli ONT data 3."
-  ecoli_ont_3_file_name="ecoli_ont_3.tar"
-  wget "${RAW_D1O2D3}" -O "${ecoli_ont_3_file_name}"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to download E. coli ONT data 3!"
-  fi
-  echo "Downloaded E. coli ONT data 3 successfully."
-  echo "Start to decompress it."
-  tar -xf "${ecoli_ont_3_file_name}" && rm "${ecoli_ont_3_file_name}"
-  echo "Decompressed it successfully."
-  if [[ $? -ne 0 ]]; then
-    err "Failed to decompress E. coli ONT data 3!"
-  fi
-  echo "Start to extract 2D reads."
-  poretools fastq --type 2D "flowcell_33/downloads/pass/" >> "${ecoli_ont_2D}"
-  rm -r "flowcell_33"
-  echo "Extracted 2D reads successfully."
-
-  local ecoli_ont_4_file_name
-  echo "Start to download E. coli ONT data 4."
-  ecoli_ont_4_file_name="ecoli_ont_4.tar"
-  wget "${RAW_D1O2D4}" -O "${ecoli_ont_4_file_name}"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to download E. coli ONT data 4!"
-  fi
-  echo "Downloaded E. coli ONT data 4 successfully."
-  echo "Start to decompress it."
-  tar -xf "${ecoli_ont_4_file_name}" && rm "${ecoli_ont_4_file_name}"
-  echo "Decompressed it successfully."
-  if [[ $? -ne 0 ]]; then
-    err "Failed to decompress E. coli ONT data 4!"
-  fi
-  echo "Start to extract 2D reads."
-  poretools fastq --type 2D "flowcell_39_K12_Histag/downloads/pass/" >> "${ecoli_ont_2D}"
-  rm -r "flowcell_39_K12_Histag"
-  echo "Extracted 2D reads successfully."
-  mv "${ecoli_ont_2D}" "${d1_dir}"
-  "${SEQTK}" seq -A "${d1_dir}/ecoli_ont_2D.fastq" > "${d1_dir}/ecoli_ont_2D.fasta"
-
-  local ecoli_ont_1D
-  ecoli_ont_1D="ecoli_ont_1D.fastq"
-  touch "${ecoli_ont_1D}"
-  download_data_with_sra_tools "${RAW_D1O1D}" true "${ecoli_ont_1D}" 'NULL'
-  mv "${ecoli_ont_1D}" "${d1_dir}" 
-  "${SEQTK}" seq -A "${d1_dir}/ecoli_ont_1D.fastq" > "${d1_dir}/ecoli_ont_1D.fasta"
-
   local ecoli_ont_R9_1D
   ecoli_ont_R9_1D="ecoli_ont_R9_1D.fasta"
   wget "${RAW_D1O}" -O "${ecoli_ont_R9_1D}"
@@ -319,74 +230,8 @@ prepare_yeast_data(){
   yeast_pacbio="yeast_pacbio.fastq"
   touch "${yeast_pacbio}"
 
-  echo "Start to download yeast PacBio data 1."
-  wget "${RAW_D2P1}"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to download yeast PacBio data 1!"
-  fi
-  echo "Downloaded yeast PacBio data successfully."
-  echo "Start to decompress it."
-  gzip -d "ERR1655118_hdf5.tgz"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to decompress yeast PacBio data!"
-  fi
-  echo "Decompressed it successfully."
-  echo "Start to decompress it."
-  tar -xf "ERR1655118_hdf5.tar" && rm "ERR1655118_hdf5.tar"
-  echo "Decompressed it successfully."
-  echo "Start to extract yeast PacBio data with pbh5tools."
-  bash5tools.py --readType "subreads" --outFilePrefix yeast_pacbio_1 --minLength 500 --minReadScore 0.8000 --outType "fastq"  "m150412_173450_00127_c100782612550000001823173608251585_s1_p0.bas.h5"
-  cat "yeast_pacbio_1.fastq" >> "${yeast_pacbio}"
-  rm "yeast_pacbio_1.fastq"
-  rm -rf m150412_173450_00127_c100782612550000001823173608251585_s1_p0*
-  echo "Extract yeast PacBio data successfully!"
-
-  echo "Start to download yeast PacBio data 2."
-  wget "${RAW_D2P2}"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to download yeast PacBio data 2!"
-  fi
-  echo "Downloaded yeast PacBio data successfully."
-
-  echo "Start to decompress it."
-  gzip -d "ERR1655119_hdf5.tgz"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to decompress yeast PacBio data!"
-  fi
-  echo "Decompressed it successfully."
-  echo "Start to decompress it."
-  tar -xf "ERR1655119_hdf5.tar" && rm "ERR1655119_hdf5.tar"
-  echo "Decompressed it successfully."
-  echo "Start to extract yeast PacBio data with pbh5tools."
-  bash5tools.py --readType "subreads" --outFilePrefix yeast_pacbio_2 --minLength 500 --minReadScore 0.8000 --outType "fastq"  "m150415_122551_00127_c100785582550000001823160308251567_s1_p0.bas.h5"
-  cat "yeast_pacbio_2.fastq" >> "${yeast_pacbio}"
-  rm "yeast_pacbio_2.fastq"
-  rm -rf m150415_122551_00127_c100785582550000001823160308251567_s1_p0*
-  echo "Extract yeast PacBio data successfully!"
-
-  echo "Start to download yeast PacBio data 3."
-  wget "${RAW_D2P3}"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to download yeast PacBio data 3!"
-  fi
-  echo "Downloaded yeast PacBio data successfully."
-  echo "Start to decompress it."
-  gzip -d "ERR1655125_hdf5.tgz"
-  if [[ $? -ne 0 ]]; then
-    err "Failed to decompress yeast PacBio data!"
-  fi
-  echo "Decompressed it successfully."
-  echo "Start to decompress it."
-  tar -xf "ERR1655125_hdf5.tar" && rm "ERR1655125_hdf5.tar"
-  echo "Decompressed it successfully."
-  echo "Start to extract yeast PacBio data with pbh5tools."
-  bash5tools.py --readType "subreads" --outFilePrefix yeast_pacbio_3 --minLength 500 --minReadScore 0.8000 --outType "fastq"  "m150423_060136_00127_c100802652550000001823174910081537_s1_p0.bas.h5"
-  cat "yeast_pacbio_3.fastq" >> "${yeast_pacbio}"
-  rm "yeast_pacbio_3.fastq"
-  rm -rf m150423_060136_00127_c100802652550000001823174910081537_s1_p0*
-  echo "Extract yeast PacBio data successfully!"
-
-  mv "${yeast_pacbio}" "${d2_dir}"
+  download_data_with_sra_tools "${RAW_D2P}" true "${yeast_pacbio}" 'NULL'
+  mv "${yeast_pacbio}" "${d2_dir}" 
   "${SEQTK}" seq -A "${d2_dir}/yeast_pacbio.fastq" > "${d2_dir}/yeast_pacbio.fasta"
   echo "Finished yeast PacBio read preparation successfully."
 
@@ -466,7 +311,8 @@ main(){
   # TODO(haowen): Start from last time to establish the benchmark
   mkdir "${TEMP_DIR}"
   mkdir "${BENCHMARK_DIR}"
-  source activate lrece
+  eval "$(conda shell.bash hook)"
+  conda activate lrece
   if [[ "${FLAGS_ecoli}" -eq "${FLAGS_TRUE}" ]]; then
     echo "Start to prepare E. coli data set."
     prepare_ecoli_data
@@ -491,7 +337,7 @@ main(){
     fi
     echo "Fruit fly data set is ready."
   fi
-  source deactivate
+  conda deactivate
 }
 
 main "$@"

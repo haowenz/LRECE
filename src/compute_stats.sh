@@ -37,9 +37,8 @@ ALIGNMENT_OUTPUT_DIR="${OUTPUT_DIR}/alignment_${DATA_SET_NAME}"
 STATS_OUTPUT_DIR="${OUTPUT_DIR}/stats_${DATA_SET_NAME}"
 
 readonly LRECE_DIR
-readonly EXTERN_DIR="${LRECE_DIR}/extern"
-readonly SEQTK="${EXTERN_DIR}/seqtk/seqtk"
-readonly MINIMAP2="${EXTERN_DIR}/minimap2/minimap2"
+readonly SEQTK="seqtk"
+readonly MINIMAP2="minimap2"
 readonly N50="${LRECE_DIR}/src/N50.py"
 
 echo "Start to evaluate corrected reads."
@@ -62,7 +61,8 @@ fi
 rm "${filtered_reads_file}"
 
 # We use samtools to generate stats
-source activate lrece
+eval "$(conda shell.bash hook)"
+conda activate lrece
 bam_file="${ALIGNMENT_OUTPUT_DIR}/${read_file_name}.bam"
 samtools view -o "${bam_file}" "${sam_file}"
 rm "${sam_file}"
@@ -94,6 +94,6 @@ printf "Genome fraction:    " >> "${stats_txt_file}"
 cut -f 5- "${bed_file}" | tail -1 >> "${stats_txt_file}"
 rm "${bed_file}"
 
-source deactivate
+conda deactivate
 
 echo "Finished evaluating corrected reads."
