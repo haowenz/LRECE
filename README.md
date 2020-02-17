@@ -14,7 +14,7 @@ Then just run:
 ```
 cd LRECE && sh install.sh
 ```
-Conda environment called *lrece* will be setup.
+Conda environment called *lrece* will be set up.
 
 ## Usage
 ### Establish benchmark
@@ -26,7 +26,6 @@ Or you can get more help information:
 ```
 sh establish_benchmark.sh -h
 ```
-The benchmark data sets can also be downloaded manually from [here]().
 
 ### Run error correction tools
 Use paired-end short reads to correct PacBio long reads:
