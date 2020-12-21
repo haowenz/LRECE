@@ -55,3 +55,8 @@ Print the help information:
 ```
 sh evaluate_correction.sh -h
 ```
+
+### Citing LRECE
+If you use LRECE, please cite:
+
+Zhang, H., Jain, C. & Aluru, S. A comprehensive evaluation of long read error correction methods. BMC Genomics 21, 889 (2020). https://doi.org/10.1186/s12864-020-07227-0
